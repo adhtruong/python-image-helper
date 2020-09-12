@@ -29,6 +29,18 @@ class Canvas:
     def context(self) -> Context:
         return self._context
 
+    def save(self) -> None:
+        self._context.save()
+
+    def restore(self) -> None:
+        self._context.restore()
+
+    def rotate(self, angle: float) -> None:
+        self._context.rotate(angle)
+
+    def translate(self, x: float, y: float) -> None:
+        self._context.translate(x, y)
+
     def scale(self, width: int, height: int) -> None:
         self._context.scale(width, height)
 
