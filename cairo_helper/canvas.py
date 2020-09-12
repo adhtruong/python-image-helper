@@ -62,13 +62,25 @@ class Canvas:
         self.set_colour(colour)
         self._context.fill()
 
-    def _draw_path(self, path: List[Point], close_path: bool, fill: bool) -> None:
+    def _render(self, fill: bool, stroke: bool) -> None:
+        if fill and stroke:
+            self._context.fill_preserve()
+            self._context.stroke()
+        elif fill:
+            self._context.fill()
+        elif stroke:
+            self._context.stroke()
+        else:
+            raise RuntimeError()
+
+    def _draw_path(self, path: List[Point], close_path: bool, fill: bool, stroke: bool) -> None:
         self._context.new_sub_path()
         for p in path:
             self._context.line_to(*p)
         if close_path:
             self._context.close_path()
-        self._context.stroke()
+
+        self._render(fill, stroke)
 
     def draw_path(self, path: List[Point], close_path: bool = False) -> None:
         self._draw_path(path, close_path, False)
@@ -76,10 +88,10 @@ class Canvas:
     def draw_polygon(self, polygon: Polygon, fill: bool = True) -> None:
         self.draw_path(polygon.points, close_path=True, fill=fill)
 
-    def draw_circle(self, circle: Circle) -> None:
+    def draw_circle(self, circle: Circle, fill: bool = False, stroke: bool = True) -> None:
         self._context.new_sub_path()
         self._context.arc(*circle.centre, circle.radius, 0, 2 * pi)
-        self._context.fill()
+        self._render(fill, stroke)
 
     def write_to_png(self, file_name: str) -> None:
         self._surface.write_to_png(file_name)
