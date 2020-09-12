@@ -1,3 +1,5 @@
+build
+dist
 Pipfile
 Pipfile.lock
 *.pyc
