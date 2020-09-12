@@ -5,6 +5,20 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
+class Colour:
+    red: float
+    blue: float
+    green: float
+    alpha: float = 1
+
+    def __post_init(self):
+        for attr in ("red", "blue", "green", "alpha"):
+            value = getattr(self, attr)
+            if value < 0 or value > 1:
+                raise ValueError(f"Values must be within [0,1]")
+
+
+@dataclass(frozen=True)
 class Point:
     x: float
     y: float
