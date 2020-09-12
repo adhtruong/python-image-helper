@@ -4,7 +4,7 @@ from typing import List
 from cairo import FORMAT_ARGB32, Context, ImageSurface
 
 from .constants import BLACK, WHITE
-from .models import Circle, Colour, Point
+from .models import Circle, Colour, Point, Polygon
 
 
 class Canvas:
@@ -62,13 +62,19 @@ class Canvas:
         self.set_colour(colour)
         self._context.fill()
 
-    def draw_path(self, path: List[Point], close_path: bool = False) -> None:
+    def _draw_path(self, path: List[Point], close_path: bool, fill: bool) -> None:
         self._context.new_sub_path()
         for p in path:
             self._context.line_to(*p)
         if close_path:
             self._context.close_path()
         self._context.stroke()
+
+    def draw_path(self, path: List[Point], close_path: bool = False) -> None:
+        self._draw_path(path, close_path, False)
+
+    def draw_polygon(self, polygon: Polygon, fill: bool = True) -> None:
+        self.draw_path(polygon.points, close_path=True, fill=fill)
 
     def draw_circle(self, circle: Circle) -> None:
         self._context.new_sub_path()
