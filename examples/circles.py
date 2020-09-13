@@ -1,3 +1,4 @@
+import os
 from itertools import product
 
 from cairo_helper import WHITE, Canvas, Circle, Point
@@ -21,7 +22,8 @@ def main() -> None:
         canvas.draw_circle(circle)
         canvas.stroke()
 
-    canvas.write_to_png("run/circle.png")
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    canvas.write_to_png(f"{dir_path}/output/circles.png")
 
 
 if __name__ == "__main__":
