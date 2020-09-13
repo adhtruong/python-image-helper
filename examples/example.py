@@ -1,10 +1,10 @@
 from itertools import product
 
-from cairo_helper import BLACK, WHITE, Canvas, Circle, Point
+from cairo_helper import WHITE, Canvas, Circle, Point
 
 RESOLUTION = 1_000
 
-N = 4
+N = 7
 
 
 def main() -> None:
@@ -15,9 +15,11 @@ def main() -> None:
 
     canvas = Canvas(RESOLUTION, RESOLUTION)
     canvas.set_background(WHITE)
-    canvas.set_colour(BLACK)
+    canvas.set_black()
+    canvas.set_line_width(0.01)
     for circle in circles:
         canvas.draw_circle(circle)
+        canvas.stroke()
 
     canvas.write_to_png("run/circle.png")
 

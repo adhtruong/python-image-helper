@@ -35,6 +35,7 @@ class Canvas:
     def restore(self) -> None:
         self._context.restore()
 
+    # Transformation
     def rotate(self, angle: float) -> None:
         self._context.rotate(angle)
 
@@ -44,6 +45,10 @@ class Canvas:
     def scale(self, width: int, height: int) -> None:
         self._context.scale(width, height)
 
+    def set_line_width(self, width: float) -> None:
+        self._context.set_line_width(width)
+
+    # Colour functionality
     def set_colour(self, colour: Colour) -> None:
         self._context.set_source_rgba(colour.red, colour.blue, colour.green, colour.alpha)
 
@@ -62,16 +67,21 @@ class Canvas:
         self.set_colour(colour)
         self._context.fill()
 
-    def _render(self, fill: bool, stroke: bool) -> None:
-        if fill and stroke:
-            self._context.fill_preserve()
-            self._context.stroke()
-        elif fill:
+    # Render methods
+    def fill(self, preserve: bool = False) -> None:
+        if not preserve:
             self._context.fill()
-        elif stroke:
+        else:
+            self._context.fill_preserve()
+
+    def stroke(self, preserve: bool = False) -> None:
+        if not preserve:
             self._context.stroke()
         else:
-            raise RuntimeError()
+            self._context.stroke_preserve()
+
+    def clip(self) -> None:
+        self._context.clip()
 
     def _draw_path(self, path: List[Point], close_path: bool, fill: bool, stroke: bool) -> None:
         self._context.new_sub_path()
@@ -80,10 +90,9 @@ class Canvas:
         if close_path:
             self._context.close_path()
 
-        self._render(fill, stroke)
-
     def draw_path(self, path: List[Point], close_path: bool = False) -> None:
         self._draw_path(path, close_path, False)
+        self.stroke()
 
     def draw_polygon(self, polygon: Polygon, fill: bool = True) -> None:
         self.draw_path(polygon.points, close_path=True, fill=fill)
@@ -91,7 +100,6 @@ class Canvas:
     def draw_circle(self, circle: Circle, fill: bool = False, stroke: bool = True) -> None:
         self._context.new_sub_path()
         self._context.arc(*circle.centre, circle.radius, 0, 2 * pi)
-        self._render(fill, stroke)
 
     def write_to_png(self, file_name: str) -> None:
         self._surface.write_to_png(file_name)
