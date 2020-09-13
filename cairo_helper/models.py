@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
+from typing import Tuple, TypeVar
 
 
 @dataclass(frozen=True)
@@ -61,13 +62,28 @@ class Circle:
         return distance < self.radius + other.radius
 
 
-@dataclass
+PointInput = TypeVar("PointInput", Point, Tuple[float, float])
+
+
+@dataclass(init=False)
 class Polygon:
     points: List[Point]
+
+    def __init__(self, points: Optional[List[PointInput]] = None, *args: PointInput) -> None:
+        if points and args:
+            raise RuntimeError()
+
+        if points is None:
+            points = args
+
+        self.points = [p if isinstance(p, Point) else Point(*p) for p in points]
 
     def get_centre(self) -> Point:
         sum_point = sum(self.points, Point(0, 0))
         return Point(sum_point.x / len(self.points), sum_point.y / len(self.points))
+
+    def __repr__(self):
+        return "Polygon[{}]".format(", ".join(f"(x={p.x}, y={p.y})" for p in self))
 
     def __iter__(self):
         return iter(self.points)

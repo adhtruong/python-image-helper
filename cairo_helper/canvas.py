@@ -8,7 +8,9 @@ from .models import Circle, Colour, Point, Polygon
 
 
 class Canvas:
-    def __init__(self, width: int, height: int, normalise: bool = True):
+    def __init__(self, width: int, height: int = None, *, normalise: bool = True):
+        if height is None:
+            height = width
         self._width = width
         self._height = height
         self._surface = ImageSurface(FORMAT_ARGB32, width, height)
@@ -83,7 +85,7 @@ class Canvas:
     def clip(self) -> None:
         self._context.clip()
 
-    def _draw_path(self, path: List[Point], close_path: bool, fill: bool, stroke: bool) -> None:
+    def _draw_path(self, path: List[Point], close_path: bool) -> None:
         self._context.new_sub_path()
         for p in path:
             self._context.line_to(*p)
@@ -94,8 +96,8 @@ class Canvas:
         self._draw_path(path, close_path, False)
         self.stroke()
 
-    def draw_polygon(self, polygon: Polygon, fill: bool = True) -> None:
-        self.draw_path(polygon.points, close_path=True, fill=fill)
+    def draw_polygon(self, polygon: Polygon) -> None:
+        self._draw_path(polygon.points, close_path=True)
 
     def draw_circle(self, circle: Circle, fill: bool = False, stroke: bool = True) -> None:
         self._context.new_sub_path()
