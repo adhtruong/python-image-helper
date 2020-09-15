@@ -1,7 +1,7 @@
 import os
 from itertools import product
 
-from cairo_helper import WHITE, Canvas, Circle, Point
+from image_helper import WHITE, Canvas, Circle, Point
 
 RESOLUTION = 1_000
 

@@ -6,7 +6,7 @@ import setuptools
 long_description = ""
 
 setuptools.setup(
-    name="cairo_helper",  # Replace with your own username
+    name="image_helper",
     version="0.0.1",
     author="Andrew Truong",
     description="A package to help render images",

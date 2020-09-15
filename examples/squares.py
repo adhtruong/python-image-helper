@@ -3,7 +3,7 @@ from itertools import product
 from math import cos, pi, sin
 from typing import Iterable
 
-from cairo_helper import BLACK, WHITE, Canvas, Point, Polygon
+from image_helper import BLACK, WHITE, Canvas, Point, Polygon
 
 RESOLUTION = 1_000
 
