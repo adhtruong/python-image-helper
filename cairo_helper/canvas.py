@@ -1,10 +1,10 @@
 from math import pi
-from typing import List
+from typing import Iterable, List
 
 from cairo import FORMAT_ARGB32, Context, ImageSurface
 
 from .constants import BLACK, WHITE, LineCap, LineJoin
-from .models import Circle, Colour, Point, Polygon
+from .models import Circle, Colour, Point, PointType, Polygon
 
 
 class Canvas:
@@ -91,15 +91,16 @@ class Canvas:
     def clip(self) -> None:
         self._context.clip()
 
-    def _draw_path(self, path: List[Point], close_path: bool) -> None:
+    def _draw_path(self, path: Iterable[Point], close_path: bool) -> None:
         self._context.new_sub_path()
         for p in path:
             self._context.line_to(*p)
         if close_path:
             self._context.close_path()
 
-    def draw_path(self, path: List[Point], close_path: bool = False) -> None:
-        self._draw_path(path, close_path)
+    def draw_path(self, path: Iterable[PointType], close_path: bool = False) -> None:
+        points = (p if isinstance(p, Point) else Point(*p) for p in path)
+        self._draw_path(points, close_path)
         self.stroke()
 
     def draw_polygon(self, polygon: Polygon) -> None:

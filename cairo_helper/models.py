@@ -62,14 +62,14 @@ class Circle:
         return distance < self.radius + other.radius
 
 
-PointInput = TypeVar("PointInput", Point, Tuple[float, float])
+PointType = TypeVar("PointInput", Point, Tuple[float, float])
 
 
 @dataclass(init=False)
 class Polygon:
     points: List[Point]
 
-    def __init__(self, points: Optional[List[PointInput]] = None, *args: PointInput) -> None:
+    def __init__(self, points: Optional[List[PointType]] = None, *args: PointInput) -> None:
         if points and args:
             raise RuntimeError()
 
