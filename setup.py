@@ -9,7 +9,7 @@ setuptools.setup(
     name="cairo_helper",  # Replace with your own username
     version="0.0.1",
     author="Andrew Truong",
-    description="A package to help render images using Cairo",
+    description="A package to help render images",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/adhtruong/cairo_helper",

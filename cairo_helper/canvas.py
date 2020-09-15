@@ -3,7 +3,7 @@ from typing import List
 
 from cairo import FORMAT_ARGB32, Context, ImageSurface
 
-from .constants import BLACK, WHITE
+from .constants import BLACK, WHITE, LineCap, LineJoin
 from .models import Circle, Colour, Point, Polygon
 
 
@@ -69,6 +69,12 @@ class Canvas:
         self.set_colour(colour)
         self._context.fill()
 
+    def set_line_cap(self, line_cap: LineCap) -> None:
+        self._context.set_line_cap(line_cap.value)
+
+    def set_line_join(self, line_join: LineJoin) -> None:
+        self._context.set_line_join(line_join.value)
+
     # Render methods
     def fill(self, preserve: bool = False) -> None:
         if not preserve:
@@ -93,7 +99,7 @@ class Canvas:
             self._context.close_path()
 
     def draw_path(self, path: List[Point], close_path: bool = False) -> None:
-        self._draw_path(path, close_path, False)
+        self._draw_path(path, close_path)
         self.stroke()
 
     def draw_polygon(self, polygon: Polygon) -> None:
