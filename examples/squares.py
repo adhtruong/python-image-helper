@@ -1,9 +1,8 @@
 import os
 from itertools import product
-from math import cos, pi, sin
 from typing import Iterable
 
-from image_helper import BLACK, WHITE, Canvas, Point, Polygon
+from image_helper import WHITE, Canvas, Polygon
 
 RESOLUTION = 1_000
 

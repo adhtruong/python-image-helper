@@ -1,5 +1,5 @@
 from math import pi
-from typing import Iterable, List
+from typing import Iterable
 
 from cairo import FORMAT_ARGB32, Context, ImageSurface
 

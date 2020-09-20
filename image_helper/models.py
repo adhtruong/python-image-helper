@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
-from typing import Tuple, TypeVar
+from typing import List, Optional, Tuple, TypeVar
 
 
 @dataclass(frozen=True)
@@ -16,7 +16,7 @@ class Colour:
         for attr in ("red", "blue", "green", "alpha"):
             value = getattr(self, attr)
             if value < 0 or value > 1:
-                raise ValueError(f"Values must be within [0,1]")
+                raise ValueError("Values must be within [0,1]")
 
 
 @dataclass(frozen=True)
@@ -69,7 +69,7 @@ PointType = TypeVar("PointInput", Point, Tuple[float, float])
 class Polygon:
     points: List[Point]
 
-    def __init__(self, points: Optional[List[PointType]] = None, *args: PointInput) -> None:
+    def __init__(self, points: Optional[List[PointType]] = None, *args: PointType) -> None:
         if points and args:
             raise RuntimeError()
 
