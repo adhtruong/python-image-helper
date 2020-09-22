@@ -27,6 +27,7 @@ class Canvas:
     def height(self) -> int:
         return self._height if not self._normalise else 1
 
+    # TODO depreciate
     @property
     def context(self) -> Context:
         return self._context

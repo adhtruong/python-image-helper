@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
-from typing import List, Optional, Tuple, TypeVar
+from typing import List, Tuple, TypeVar
 
 
 @dataclass(frozen=True)
@@ -12,7 +12,7 @@ class Colour:
     green: float
     alpha: float = 1
 
-    def __post_init(self):
+    def __post_init__(self):
         for attr in ("red", "blue", "green", "alpha"):
             value = getattr(self, attr)
             if value < 0 or value > 1:
@@ -69,13 +69,7 @@ PointType = TypeVar("PointInput", Point, Tuple[float, float])
 class Polygon:
     points: List[Point]
 
-    def __init__(self, points: Optional[List[PointType]] = None, *args: PointType) -> None:
-        if points and args:
-            raise RuntimeError()
-
-        if points is None:
-            points = args
-
+    def __init__(self, *points: PointType) -> None:
         self.points = [p if isinstance(p, Point) else Point(*p) for p in points]
 
     def get_centre(self) -> Point:

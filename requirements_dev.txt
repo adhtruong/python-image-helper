@@ -4,15 +4,15 @@ atomicwrites==1.4.0
 attrs==20.2.0
 autopep8==1.5.4
 black==20.8b1
-cairo-helper==0.0.1
 cfgv==3.2.0
 click==7.1.2
 colorama==0.4.3
+coverage==5.3
 distlib==0.3.1
 filelock==3.0.12
 flake8==3.8.3
 identify==1.5.0
-image-helper==0.1.0
+image-helper==0.1.1
 iniconfig==1.0.1
 isort==5.5.2
 jedi==0.17.2
@@ -34,6 +34,7 @@ pyflakes==2.2.0
 pylint==2.6.0
 pyparsing==2.4.7
 pytest==6.0.2
+pytest-cov==2.10.1
 python-jsonrpc-server==0.4.0
 python-language-server==0.35.0
 PyYAML==5.3.1
