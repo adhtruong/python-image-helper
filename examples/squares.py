@@ -15,7 +15,7 @@ def get_rectangles(n: int) -> Iterable[Polygon]:
             continue
 
         yield Polygon(
-            ((i + i_offset) / n, (j + j_offset) / n) for i_offset, j_offset in ((0, 0), (0, 1), (1, 1), (1, 0))
+            *(((i + i_offset) / n, (j + j_offset) / n) for i_offset, j_offset in ((0, 0), (0, 1), (1, 1), (1, 0)))
         )
 
 

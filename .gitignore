@@ -3,3 +3,5 @@ dist
 Pipfile
 Pipfile.lock
 *.pyc
+image_helper.egg-info
+.coverage
