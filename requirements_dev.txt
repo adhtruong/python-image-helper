@@ -12,7 +12,6 @@ distlib==0.3.1
 filelock==3.0.12
 flake8==3.8.3
 identify==1.5.0
-image-helper==0.1.1
 iniconfig==1.0.1
 isort==5.5.2
 jedi==0.17.2
