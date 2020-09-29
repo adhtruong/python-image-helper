@@ -45,12 +45,6 @@ class Line:
     start: Point
     end: Point
 
-    def __add__(self, point: Point) -> Line:
-        return Line(self.start + point, self.end + point)
-
-    def __sub__(self, point: Point) -> Line:
-        return Line(self.start - point, self.end - point)
-
 
 @dataclass
 class Circle:
@@ -76,7 +70,7 @@ class Polygon:
         sum_point = sum(self.points, Point(0, 0))
         return Point(sum_point.x / len(self.points), sum_point.y / len(self.points))
 
-    def __repr__(self):
+    def __repr__(self):  # pragma: no cover
         return "Polygon[{}]".format(", ".join(f"(x={p.x}, y={p.y})" for p in self))
 
     def __iter__(self):

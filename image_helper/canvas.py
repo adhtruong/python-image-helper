@@ -29,7 +29,7 @@ class Canvas:
 
     # TODO depreciate
     @property
-    def context(self) -> Context:
+    def context(self) -> Context:  # pragma: no cover
         return self._context
 
     def save(self) -> None:

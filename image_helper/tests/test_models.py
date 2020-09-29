@@ -27,3 +27,4 @@ def test_circle():
 def test_polygon():
     p = Polygon((0, 0), (1, 1))
     assert p.get_centre() == Point(0.5, 0.5)
+    assert [Point(0, 0), Point(1, 1)] == list(p)
