@@ -1,5 +1,5 @@
 from math import pi
-from typing import Iterable
+from typing import Iterable, Optional
 
 from cairo import FORMAT_ARGB32, Context, ImageSurface
 
@@ -8,7 +8,7 @@ from .models import Circle, Colour, Point, PointType, Polygon
 
 
 class Canvas:
-    def __init__(self, width: int, height: int = None, *, normalise: bool = True):
+    def __init__(self, width: int, height: Optional[int] = None, *, normalise: bool = True):
         if height is None:
             height = width
         self._width = width
@@ -102,7 +102,6 @@ class Canvas:
     def draw_path(self, path: Iterable[PointType], close_path: bool = False) -> None:
         points = (p if isinstance(p, Point) else Point(*p) for p in path)
         self._draw_path(points, close_path)
-        self.stroke()
 
     def draw_polygon(self, polygon: Polygon) -> None:
         self._draw_path(polygon.points, close_path=True)
