@@ -3,7 +3,7 @@ from typing import Iterable, Optional
 
 from cairo import FORMAT_ARGB32, Context, ImageSurface
 
-from .constants import BLACK, WHITE, LineCap, LineJoin
+from .constants import BLACK, WHITE, FillRule, LineCap, LineJoin
 from .models import Circle, Colour, Point, PointType, Polygon
 
 
@@ -75,6 +75,9 @@ class Canvas:
 
     def set_line_join(self, line_join: LineJoin) -> None:
         self._context.set_line_join(line_join.value)
+
+    def set_fill_rule(self, file_rule: FillRule) -> None:
+        self._context.set_fill_rule(file_rule.value)
 
     # Render methods
     def fill(self, preserve: bool = False) -> None:

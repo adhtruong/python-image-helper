@@ -1,6 +1,6 @@
 import pytest
 
-from image_helper import Canvas, Circle, Colour, LineCap, LineJoin, Point
+from image_helper import Canvas, Circle, Colour, FillRule, LineCap, LineJoin, Point
 
 
 @pytest.fixture(scope="module")
@@ -47,6 +47,11 @@ def test_setting_line_cap(canvas, line_cap):
 @pytest.mark.parametrize("line_join", list(LineJoin))
 def test_setting_line_join(canvas, line_join):
     canvas.set_line_join(line_join)
+
+
+@pytest.mark.parametrize("fill_rule", list(FillRule))
+def test_setting_fill_rule(canvas, fill_rule: FillRule):
+    canvas.set_fill_rule(fill_rule)
 
 
 def test_transform(canvas):
