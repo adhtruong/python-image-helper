@@ -1,6 +1,7 @@
 from enum import Enum
 
 from cairo import LINE_CAP_BUTT, LINE_CAP_ROUND, LINE_CAP_SQUARE, LINE_JOIN_BEVEL, LINE_JOIN_MITER, LINE_JOIN_ROUND
+from cairo import FillRule as CairoFillRule
 
 from image_helper.models import Colour
 
@@ -18,3 +19,8 @@ class LineJoin(Enum):
     BEVEL = LINE_JOIN_BEVEL
     MITER = LINE_JOIN_MITER
     ROUND = LINE_JOIN_ROUND
+
+
+class FillRule(Enum):
+    WINDING = CairoFillRule.WINDING
+    EVEN_ODD = CairoFillRule.EVEN_ODD
