@@ -1,3 +1,5 @@
+from math import pi, sqrt
+
 import pytest
 
 from image_helper import Circle, Colour, Point, Polygon
@@ -17,6 +19,14 @@ def test_point():
     assert Point(1, 1) == Point(1, 0) + Point(0, 1)
     assert Point(2, 1) - Point(1, 1) == Point(1, 0)
     assert (0, 1) == tuple(Point(0, 1))
+
+
+def test_point_from_polar():
+    assert Point(0, 0) == Point.from_polar(0, 0)
+    assert Point(0, 0) == Point.from_polar(0, 1)
+    assert Point(1, 0) == Point.from_polar(1, 0)
+    assert pytest.approx(list(Point(-2, 0))) == list(Point.from_polar(2, pi))
+    assert pytest.approx(list(Point(1, 1))) == list(Point.from_polar(sqrt(2), pi / 4))
 
 
 def test_circle():
