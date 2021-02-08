@@ -1,18 +1,23 @@
 from decimal import Decimal
-from typing import Iterator
+from itertools import accumulate, chain, repeat, takewhile
+from typing import Iterable
 
 
-def float_range(start: float, stop: float, step: float) -> Iterator[float]:
+def float_range(start: float, stop: float, step: float) -> Iterable[float]:
     if not step:
         raise ValueError("Step can not be 0")
 
-    current = Decimal(start)
-    step_decimal = Decimal(step)
-    if step_decimal > 0:
-        while current < stop:
-            yield float(current)
-            current += step_decimal
+    step_value = Decimal(step)
+    end_value = Decimal(stop)
+    if step_value > 0:
+
+        def predicate(current):
+            return current < end_value
+
     else:
-        while stop < current:
-            yield float(current)
-            current += step_decimal
+
+        def predicate(current):
+            return end_value < current
+
+    values = accumulate(chain([Decimal(start)], repeat(step_value)))
+    yield from map(float, takewhile(predicate, values))
