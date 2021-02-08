@@ -24,6 +24,13 @@ class Point:
     x: float
     y: float
 
+    @staticmethod
+    def from_polar(distance: float, angle: float) -> Point:
+        if not distance:
+            return Point(0, 0)
+
+        return Point(distance * math.cos(angle), distance * math.sin(angle))
+
     def distance_squared(self, x: float, y: float) -> float:
         return (self.x - x) ** 2 + (self.y - y) ** 2
 
