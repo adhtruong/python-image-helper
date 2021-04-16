@@ -1,1 +1,1 @@
-pycairo==1.19.1
+pycairo==1.20.0
